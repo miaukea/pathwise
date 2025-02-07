@@ -1,3 +1,3 @@
-export const AllTrips = (req, res) => {
-  res.send('All You Trips!');
+export const allTrips = (req, res) => {
+  res.send('All Your Trips!');
 }
