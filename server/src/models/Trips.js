@@ -1,9 +1,9 @@
-import { DataTypes, Model } from 'sequelize';
+import { Sequelize, DataTypes, Model } from 'sequelize';
 
-class Volunteer extends Model {}
+class Trip extends Model {}
 
-export function VolunteerFactory(sequelize) {
-  Volunteer.init({
+export function TripFactory(sequelize) {
+  Trip.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -13,22 +13,18 @@ export function VolunteerFactory(sequelize) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    startdate: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phone: {
+    enddate: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    notes: {
-      type: DataTypes.TEXT,
-      allowNull: true,
     }
   }, {
-    tableName: 'volunteers',
+    tableName: 'trips',
     sequelize,
   });
 
-  return Volunteer;
+  return Trip;
 }
