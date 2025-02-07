@@ -1,13 +1,10 @@
 import express from 'express';
+const router = express.Router();
+import api from './api/trip_api_index.js';
 
-import { apitripRouter } from './api/trip_api_index.js';
-
-apitripRouter.use('/', apitripRouter );
-
-const apiRouter = express.Router();
-
-apiRouter.get('/', (req, res) => {
+router.use('/api', api);
+router.get('/', (req, res) => {
   res.send('Trips to the World!');
 });
 
-export  { apiRouter };
+export default router;

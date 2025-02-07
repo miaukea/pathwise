@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import sequelize from './config/connection.js';
-import { apiRouter } from './routes/routes_index.js';
+import routes from './routes/routes_index.js';
 dotenv.config();
 
 const app = express();
@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use(express.json());
-app.use(apiRouter);
+app.use(routes);
 
 const forceDatabaseRefresh = process.env.FORCE_DATABASE_REFRESH === '1' || false;
 sequelize.sync({ force: forceDatabaseRefresh }).then(() => {

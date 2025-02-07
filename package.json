@@ -1,5 +1,5 @@
 {
-  "name": "volunteer-management-demo",
+  "name": "pathwise-trip-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "render-build": "npm install && npm run build"
   },
   "keywords": [],
-  "author": "Latisha McNeel",
+  "author": "Eddy Howell",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^9.1.2",
