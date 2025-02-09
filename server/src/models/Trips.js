@@ -1,5 +1,7 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
+
+
 class Trip extends Model {}
 
 export function TripFactory(sequelize) {

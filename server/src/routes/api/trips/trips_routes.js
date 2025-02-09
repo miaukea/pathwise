@@ -1,18 +1,19 @@
-import express from 'express';
+import { Router,} from 'express';
 
 import { Trip } from '../../../models/model_index.js';
 
-router.get('/', async (req, res) => {
+export const getAllTrips =async (Request, Response) => {
   try{
     const trips = await Trip.findAll();
   res.json(trips);
   }catch{
     res.status(500).json({message: error.message})
   }
-});
+};
 
 
-const router = express.Router();
+const router = Router();
+router.get('/',getAllTrips)
 //
 // Read
   // GET /trips -Get all trips by trip_names

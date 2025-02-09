@@ -1,27 +1,30 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-class TripStops extends Model {}
+class TripStop extends Model {}
 
-export function tripstopsfactory(sequelize) {
-  TripStops.init({
+export function TripripStopsFactory(sequelize) {
+  TripStop.init({
     trip_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
     destination_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    {
+    arrivaltime:{ 
+      type: DataTypes.TIME,
+      allownull:false
+    },
    departuretime: {
-      type: DataTypes.STRING,
+      type: DataTypes.TIME,
       allowNull: false,
     }
   }, {
-    tableName: 'trips',
+    tableName: 'trips_stop',
     sequelize,
   });
 
-  return TripStops;
+  return TripStop;
 }
