@@ -15,11 +15,11 @@ export function TripripStopsFactory(sequelize) {
     },
     arrivaltime:{ 
       type: DataTypes.TIME,
-      allownull:false
+      allownull:true
     },
    departuretime: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: true,
     }
   }, {
     tableName: 'trips_stop',

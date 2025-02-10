@@ -8,41 +8,37 @@ export function DestinationFactory(sequelize) {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
     destination_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     type_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     address1: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }, 
     address2: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
      city: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     state_province: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }, postal_code: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    postalcode: {
+      allowNull: true,
+    }, country: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-   country: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }
   }, {
     tableName: 'destinations',

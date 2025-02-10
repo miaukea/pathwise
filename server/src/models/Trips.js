@@ -16,12 +16,12 @@ export function TripFactory(sequelize) {
       allowNull: false,
     },
     startdate: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.TIME,
+      allowNull: true,
     },
     enddate: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.TIME,
+      allowNull: true,
     }
   }, {
     tableName: 'trips',

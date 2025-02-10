@@ -22,21 +22,18 @@ console.log(DestinationType === sequelize.models.DestinationType);
 
 
 // One-to-Many Relationship: 
-    // Trips has many Trip_stops
-    // Trip_stop belongs to Trips
 Trip.hasMany(TripStop, { foreignKey: 'trip_Id' });
 TripStop.belongsTo(Trip, { foreignKey: 'trip_Id' });
-    
-    // Many to Many Relationships 
-    
-    
-    //module.exports = { User, Post };
 
+TripStop.hasMany(Destination,{foreignKey: 'destination_id'});
+Destination.belongsTo(TripStop, {foreignKey: 'destination_id'});
 
+Destination.hasMany(DestinationType, {foreignKey: 'type_id'});
+DestinationType.belongsTo(Destination, {foreignKey: 'type_id'});
 
+// Many to Many Relationships 
 
-
-export { Trip };
+export { Trip, TripStop, Destination, DestinationType };
 
 
 
