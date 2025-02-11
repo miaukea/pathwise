@@ -1,11 +1,12 @@
 import express from 'express';
+
 const router = express.Router();
-import api from './api/index.js';
+import trips from './trips/trip-index.js';
 
-router.use('/api', api);
 
+router.use('/trips', trips);
 router.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json({ message: 'Hello Trip API!' });
 });
 
 export default router;

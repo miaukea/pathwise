@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import sequelize from './config/connection.js';
-import routes from './routes/index.js';
+import routes from './routes/routes_index.js';
 dotenv.config();
 
 const app = express();
