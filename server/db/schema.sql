@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS volunteer_management;
-CREATE DATABASE volunteer_management;
+DROP DATABSE IF EXISTS destination_management;
+CREATE DATABASE destination_management;
