@@ -11,16 +11,16 @@ export function TripFactory(sequelize) {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    tripname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     startdate: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: true,
     },
     enddate: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: true,
     }
   }, {

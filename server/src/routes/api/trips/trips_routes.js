@@ -1,55 +1,136 @@
-import { Router,} from 'express';
+import { Router,request, response} from 'express';
 
+
+// Imported all models
 import { Trip } from '../../../models/model_index.js';
+import { TripStop } from '../../../models/model_index.js';
+import { Destination } from '../../../models/model_index.js';
+import { DestinationType } from '../../../models/model_index.js';
 
-export const getAllTrips =async (Request, Response) => {
+
+// Read
+  // GET /trips -Get all trips by trip_names
+export const getAllTrips =async (response) => {
   try{
     const trips = await Trip.findAll();
-  res.json(trips);
+  response.json(trips);
   }catch{
-    res.status(500).json({message: error.message})
+    response.status(500).json({message: error.message})
   }
 };
 
 
+  // GET /trip/trip_id/destinations - Get all Trips with associated Trip_stops and Destinations by trip_id
+
+export const getAllTripsTripStopDestinations = async (response) => {
+  try {
+    const trips = await Trip.findAll({
+      include: [
+        {
+          model: TripStop,
+          include: [
+            {
+              model: Destination,
+              include: [ DestinationType ],
+            },
+          ],
+        },
+      ],
+    });
+    response.json(trips);
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+}
+
+  // Get a single Trip with nested relationships
+
+  export const getATripById = async (request, response) => {
+  try {
+    const trip = await Trip.findByPk(request.params.id, {
+      include: [
+        {
+          model: TripStop,
+          include: [
+            {
+              model: Destination,
+              include: [DestinationType],
+            },
+          ],
+        },
+      ],
+    });
+    if (!trip) return response.status(404).json({ error: 'Trip not found' });
+    response.json(trip);
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+};
+
+// POST
+  // Create a new Trip with associated Trip Stops and Destinations
+export const getcreatetripNStopsNDestinations = async (request, response) => {
+  try {
+    const {tripData, tripStopData } = request.body;
+
+
+    // Create the trip
+const newTrip = await Trip.create(tripData);
+
+    // Create trip stops associated with the trip
+if (Array.isArray(tripStopData) && tripStopData.length > 0) {
+  const tripStops = await Promise.all(
+    tripStopData.map(async (tripStop) => {
+      const createdTripStop = await TripStop.create({
+        ...tripStop,
+        trip_id: newTrip.id // Associate the trip stop with the newly created trip
+      });
+
+      // Create the destination and destination type for this trip stop
+      if (tripStop.destination) {
+        const createdDestination = await Destination.create({
+          ...tripStop.destination,
+          trip_stop_id: createdTripStop.id
+        });
+
+        if (tripStop.destination.destinationsType) {
+          await Destination_type.create({
+            ...tripStop.destination.destinationsType,
+            destination_id: createdDestination.id
+          });
+        }
+      }
+
+      return createdTripStop;
+    })
+  );
+
+    // Add trip stops to the response
+  newTrip.dataValues.tripStops = tripStops;
+}
+
+response.status(201).json(newTrip);
+
+  } catch (error) {
+    response.status(500).json({ error: error.message });
+  }
+};
+
+
+// Add routes for Trip_stops, Destinations, and Destination_types as needed
 const router = Router();
-router.get('/',getAllTrips)
-//
-// Read
-  // GET /trips -Get all trips by trip_names
-
-  // GET /trip/trip_id/destinations - Get all destination for a trip stop by trip_id
-
-  // GET Trip_id/destination_id/type_id/ -Get a type of destination for a trip by trip_id, destionation_id and type_id
 
 
-  // Trip destinations by trip_id through destination_ids  
+// GET /trips -Get all trips by trip_names
+router.get('/',getAllTrips);
 
-  // Destination_typesNames by trip_id through destination_id then type_ids 
-  // Get info by destination type name
+// Create a new Trip with associated Trip Stops and Destinations
+router.get('/', getcreatetripNStopsNDestinations);
 
-// Create 
-  //  POST /Trips -Trip_names, start_date, stop_dates ___
-    // Optional
-      // destionation names, 
-      // assigned types, 
-      // addresses
-      // arrival and depture time(s), 
-      // destination_type
+// Get a single Trip with nested relationships
+router.get('/', getATripById );
 
-
-// Update 
-  // POST 
-      // start_date, 
-      // stop_dates ___
-      // destionation names, 
-      // assigned types, 
-      // addresses
-      // arrival and depture time(s), 
-      // destination_type
-
-
-
-
+// Get all Trips with associated Trip_stops and Destinations by trip_id
+router.get('/', getAllTripsTripStopDestinations);
 
 export default router ;

@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.json());
 app.use(routes);
 
+// Connect to the database before starting the Express.js server
 const forceDatabaseRefresh = process.env.FORCE_DATABASE_REFRESH === '1' || false;
 sequelize.sync({ force: forceDatabaseRefresh }).then(() => {
   app.listen(PORT, () => {
