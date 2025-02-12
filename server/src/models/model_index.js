@@ -4,7 +4,7 @@ import sequelize from '../config/connection.js';
 import { TripFactory } from './trips.js';
 import { TripripStopsFactory } from './trip_stops.js';
 import { DestinationFactory } from './destination.js';
-import { DestinationTypeFactory } from './Destinations_type.js';
+import { DestinationTypeFactory } from './destinations_type.js';
 
 
 const Trip = TripFactory(sequelize);
