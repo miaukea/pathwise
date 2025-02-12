@@ -69,7 +69,7 @@ export const getAllTripsTripStopDestinations = async (response) => {
 
 // POST
   // Create a new Trip with associated Trip Stops and Destinations
-export const getcreatetripNStopsNDestinations = async (request, response) => {
+export const createtripNStopsNDestinations = async (request, response) => {
   try {
     const {tripData, tripStopData } = request.body;
 
@@ -94,8 +94,8 @@ if (Array.isArray(tripStopData) && tripStopData.length > 0) {
         });
 
         if (tripStop.destination.destinationsType) {
-          await Destination_type.create({
-            ...tripStop.destination.destinationsType,
+          await DestinationType.create({
+            ...tripStop.Destination.DestinationType,
             destination_id: createdDestination.id
           });
         }
@@ -122,15 +122,15 @@ const router = Router();
 
 
 // GET /trips -Get all trips by trip_names
-router.get('/',getAllTrips);
+router.get('/triplist',getAllTrips);
 
 // Create a new Trip with associated Trip Stops and Destinations
-router.get('/', getcreatetripNStopsNDestinations);
+router.post('/newtrip', createtripNStopsNDestinations);
 
 // Get a single Trip with nested relationships
-router.get('/', getATripById );
+router.get('/:id', getATripById );
 
 // Get all Trips with associated Trip_stops and Destinations by trip_id
-router.get('/', getAllTripsTripStopDestinations);
+router.get('/alltripinfo', getAllTripsTripStopDestinations);
 
-export default router ;
+export {router as tripRoutes };
