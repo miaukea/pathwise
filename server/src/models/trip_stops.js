@@ -9,17 +9,21 @@ export function TripripStopsFactory(sequelize) {
       primaryKey: true,
       autoIncrement: true,
     },
+    stop_name: { 
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     destination_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     arrivaltime:{ 
       type: DataTypes.TIME,
-      allownull:false
+      allownull:true
     },
    departuretime: {
       type: DataTypes.TIME,
-      allowNull: false,
+      allowNull: true,
     }
   }, {
     tableName: 'trips_stop',

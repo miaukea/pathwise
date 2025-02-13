@@ -1,15 +1,14 @@
-import express from 'express';
-import authRoutes from "./authRoutes.js";
 
-const router = express.Router();
-import trips from './trips/trip-index.js';
+import { Router } from 'express';
+import { authRoutes } from "./authRoutes.js";
 
+const router = Router();
+import { tripIndexRoutes } from './trips/trip-index.js';
 
-router.use('/trips', trips);
+router.use('/trips', tripIndexRoutes);
+router.get('/', (req, res) => {  
+res.send({ message: 'Hello Trip API!' });
 router.use('/auth', authRoutes);
-
-router.get('/', (req, res) => {
-  res.json({ message: 'Hello Trip API!' });
 });
 
-export default router;
+export { router as api };
