@@ -1,5 +1,5 @@
 import express from 'express';
-import authRoutes from "./authRoutes.js";
+import authRoutes from "../authRoutes.js";
 
 const router = express.Router();
 import trips from './trips/trip-index.js';
