@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch')
+const {destination, destinationType} = require ('server\src\models')
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -33,11 +34,37 @@ app.get('/api/tripadvisor/search', async (req, res) => {
         }
 
         const detailsData = await detailsResponse.json();
-        res.json(detailsData);
+        const destinationType = await DestinationType.upsert({
+            type_name: detailsData.category?.name || "Unknown",
+            type_parent_id: locationId,
+        });
+
+        const destination = await Destination.upsert({
+            destination_name: detailsData.name || "Unknown",
+            type_id: locationId,
+            address1: detailsData.address_obj?.street1 || "Unknown",
+            address2: detailsData.address_obj?.street2 || "Unknown",
+            city: detailsData.address_obj?.city || "Unknown",
+            state_province: detailsData.address_obj?.state || "Unknown",
+            postal_code: detailsData.address_obj?.postalcode || "Unknown",
+            country: detailsData.address_obj?.country || "Unknown",
+        });
+        const Destination_types = await Destination_types.upsert({
+            type_name: detailsData.category?.name || "Unknown",
+            type_parent_id: locationId,
+        });
+
+        res.json({
+            message: "Data saved successfully",
+            destinationType,
+            destination,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
     }
 });
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
