@@ -1,4 +1,3 @@
-
 import { Router } from 'express';
 import { authRoutes } from "./authRoutes.js";
 
