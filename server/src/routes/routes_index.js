@@ -1,14 +1,15 @@
-import express from 'express';
-import api from './api/trip_api_index.js';
-import authRoutes from './authRoutes.js';
 
-const router = express.Router();
+import { Router} from 'express';
+const router = Router();
+import { api }  from './api/trip_api_index.js';
+import { authRoutes } from './authRoutes.js';
+
+
 
 router.use('/api', api);
 router.use("/auth", authRoutes);
 
 router.get('/', (req, res) => {
-  res.send('Trips to the World!');
-});
+  res.send('Trips to the World!');});
 
 export default router;

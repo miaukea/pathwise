@@ -1,10 +1,14 @@
-import express from 'express';
-const router  = express.Router();
-import tripsRoutes from './trips_routes.js';
-import { allTrips } from '../../../controllers/trip_controller/tripcontroller.js';
+import { Router } from 'express';
+import { tripRoutes } from './trips_routes.js';
 
-router.use('/trips', tripsRoutes);
-router.get('/', allTrips);
+const router = Router();
 
+// Prefix all routes defined in trips_routes.js
+router.use('/', tripRoutes);
 
-export default router
+router.get('/', (req, res) => {  // Add req as the first parameter
+    res.json({ message: 'Welcome to trip index' });
+});
+
+export { router as tripIndexRoutes };
+

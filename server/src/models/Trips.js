@@ -11,17 +11,17 @@ export function TripFactory(sequelize) {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    tripname: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     startdate: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     enddate: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.DATE,
+      allowNull: true,
     }
   }, {
     tableName: 'trips',
