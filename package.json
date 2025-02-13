@@ -1,35 +1,41 @@
 {
   "name": "pathwise-trip-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A full-stack travel planning app using the TripAdvisor API",
   "main": "index.js",
   "scripts": {
     "start": "npm run client:build && npm run server",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
-    "server": "cd server && npm start ",
+    "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
     "install": "cd client && npm install && cd ../server && npm install",
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
     "build": "cd server && npm run build",
     "seed": "cd server && npm run seed",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "render-build": "npm install && npm run build"
+    "test": "jest --coverage",
+    "render-build": "npm install && npm run client:build && npm run build"
   },
-  "keywords": [],
+  "keywords": ["travel", "tripadvisor", "full-stack"],
   "author": "Eddy Howell",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "concurrently": "^9.1.2",
     "nodemon": "^3.1.9",
-    "wait-on": "^8.0.2"
+    "wait-on": "^8.0.2",
+    "jest": "^29.6.3",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.1",
+    "vite": "^6.1.0"
   }
 }
