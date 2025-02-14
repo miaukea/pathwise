@@ -4,7 +4,7 @@
   "description": "A full-stack travel planning app using the TripAdvisor API",
   "main": "index.js",
   "scripts": {
-    "start": "npm run client:build && npm run server",
+    "start": "npm run client:build && npm run server:dev",
     "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
     "server": "cd server && npm start",
     "server:dev": "cd server && npm run dev",
