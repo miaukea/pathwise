@@ -1,8 +1,5 @@
-import { motion, useAnimation } from 'framer-motion';
-import React, { useState } from'react';
-import { motionPath, useTransform } from 'framer-motion';
-import { motion, useAnimation } from 'framer-motion';
-import { motionPath, useTransform } from 'framer-motion';
+import { motion, useAnimation, motionPath, useTransform } from 'framer-motion';
+import React, { useState } from 'react';
 
 export const fadeIn = {
     hidden: { opacity: 0, y: -50 },

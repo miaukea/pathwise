@@ -7,42 +7,23 @@ const urlsToCache = [
 '/assets/icons/icon-512x512.png',
 ];
 
-// Install Service Worker and Pre-cache Files
-self.addEventListener('install', (event) => {
-event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
-);
-  self.skipWaiting(); // Activate service worker immediately
-});
-
-// Fetch Resources with Cache-Then-Network Strategy
 self.addEventListener('fetch', (event) => {
-event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-    if (cachedResponse) {
-        return cachedResponse; // Serve from cache
-    }
+    event.respondWith(
+        caches.match(event.request).then((cachedResponse) => {
+            if (cachedResponse) {
+                return cachedResponse; // Serve from cache
+            }
 
-    return fetch(event.request).then((networkResponse) => {
-        return caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone()); // Update cache
-        return networkResponse;
-        });
-    });
-    }).catch(() => caches.match('/index.html')) // Offline fallback
-);
-});
-
-// Activate New Cache and Remove Old Caches
-self.addEventListener('activate', (event) => {
-event.waitUntil(
-    caches.keys().then((cacheNames) => {
-    return Promise.all(
-        cacheNames
-          .filter((cacheName) => cacheName !== CACHE_NAME) // Remove old versions
-        .map((cacheName) => caches.delete(cacheName))
+            return fetch(event.request).then((networkResponse) => {
+                if (!networkResponse.ok) {
+                    throw new Error('Network response was not ok'); // Handle invalid response
+                }
+                return caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, networkResponse.clone()); // Update cache
+                    return networkResponse;
+                });
+            }).catch(() => caches.match('/index.html')); // Offline fallback
+        })
     );
-    }).then(() => self.clients.claim()) // Ensure immediate activation
-);
 });
 

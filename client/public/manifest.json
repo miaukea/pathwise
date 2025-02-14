@@ -2,8 +2,8 @@
     "name": "Pathwise",
     "short_name": "Pathwise",
     "description": "An AI-powered travel itinerary planner",
-    "start_url": "/",
-    "scope": "/",
+    "start_url": "/index.html",  // Updated start_url
+    "scope": "/travel/",          // Updated scope to reflect intended navigation
     "display": "standalone",
     "orientation": "portrait",
     "background_color": "#ffffff",
