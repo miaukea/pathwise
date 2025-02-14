@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { Profile } from '../models/model_index.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
