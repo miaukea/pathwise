@@ -31,16 +31,10 @@ function ProfileFactory(sequelize) {
           },
         },
       },
-      role: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
     },
     {
       sequelize,
       modelName: 'profile',
-      timestamps: false,
-      underscored: true,
     }
   );
 

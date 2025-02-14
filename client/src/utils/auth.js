@@ -4,12 +4,12 @@ class AuthService {
     return token;
   }
 
-  getToken(): string {
+  getToken() {
     const loggedUser = localStorage.getItem('id_token') || '';
     return loggedUser;
   }
 
-  login(idToken: string) {
+  login(idToken) {
     localStorage.setItem('id_token', idToken);
     window.location.assign('/');
   }
