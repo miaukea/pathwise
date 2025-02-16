@@ -25,7 +25,7 @@ nav: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "#333",
+    backgroundColor: "pink",
     color: "#fff",
     padding: "0.5rem 1rem",
 },
