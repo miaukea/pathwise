@@ -1,7 +1,7 @@
 class AuthService {
   loggedIn() {
     const token = this.getToken();
-    return token;
+    return !!token; 
   }
 
   getToken() {
@@ -21,3 +21,4 @@ class AuthService {
 }
 
 export default new AuthService();
+
