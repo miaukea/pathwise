@@ -1,0 +1,69 @@
+{
+    "trips": [
+      {
+        "id": 1,
+        "name": "European Adventure",
+        "startdate": "2025-06-01",
+        "enddate": "2025-06-15"
+      },
+      {
+        "id": 2,
+        "name": "Asian Expedition",
+        "startdate": "2025-07-10",
+        "enddate": "2025-07-30"
+      }
+    ],
+    "tripStops": [
+      {
+        "trip_id": 1,
+        "stop_name": "Paris",
+        "destination_id": 1,
+        "arrivaltime": "2025-06-02T10:00:00",
+        "departuretime": "2025-06-05T18:00:00"
+      },
+      {
+        "trip_id": 1,
+        "stop_name": "Rome",
+        "destination_id": 2,
+        "arrivaltime": "2025-06-06T12:00:00",
+        "departuretime": "2025-06-10T15:00:00"
+      }
+    ],
+    "destinations": [
+      {
+        "id": 1,
+        "destination_name": "Eiffel Tower",
+        "type_id": 1,
+        "address1": "Champ de Mars",
+        "address2": "",
+        "city": "Paris",
+        "state_province": "Île-de-France",
+        "postal_code": "75007",
+        "country": "France"
+      },
+      {
+        "id": 2,
+        "destination_name": "Colosseum",
+        "type_id": 2,
+        "address1": "Piazza del Colosseo",
+        "address2": "",
+        "city": "Rome",
+        "state_province": "Lazio",
+        "postal_code": "00184",
+        "country": "Italy"
+      }
+    ],
+    "destinationTypes": [
+      {
+        "id": 1,
+        "type_name": "Historical Landmark",
+        "type_parent_id": null
+      },
+      {
+        "id": 2,
+        "type_name": "Cultural Site",
+        "type_parent_id": 1
+      }
+    ]
+  }
+  
